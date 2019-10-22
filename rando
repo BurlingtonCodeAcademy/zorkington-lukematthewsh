@@ -1,0 +1,13 @@
+let states = {
+    "room1" : {canChangeTo: ["room2" , "room4" , "room5"]},
+    "room2" : {canChangeTo: ["room1" , "room3"]},
+    "room3" : {canChangeTo: ["room2"]},
+    "room4" : {canChangeTo: ["room1"]},
+    "room5" : {canChangeTo: ["room1"]}
+  }
+
+  let sign = {
+      'description': "Welcome to Burlington Code Academy! Come up to the third floor. \nIf the door is locked, use the code 12345",
+      'read': () => {
+        return this.description
+      }  
