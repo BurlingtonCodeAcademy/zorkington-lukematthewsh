@@ -70,33 +70,46 @@ There is a door here. A keypad sits on the handle.\nOn the door is a hand writte
       }
     }
 
-    let userMove = await ask("The classroom is up stairs")
+    let userMove = await ask("The classroom is up stairs. You can go to class.\nOr go to main.")
     while (userMove !== 'go to class') {
       userMove = await ask('>_')
       if (userMove === 'go to class') {
         moveToRoom(room3)
         console.log(room3.message)
-        console.log("Your desk is in the back.\nIf you need a writing utencil there should be one at your desk!")
+        console.log("Your desk is in the back.\nIf you need a writing utensil there should be one at your desk!")
       }
       else if (userMove === "go to main") {
         moveToRoom(room1)
         console.log(room1.message)
+        console.log("Down the street is Muddy Waters and Mr. Mikes")
       }
       else {
         console.log("I dont understand" + userMove)
       }
+      let secondMove = await ask("Are you hungry or tired?")
+      while (secondMove !== 'hungry' || secondMove !== 'tired') {
+        secondMove = await ask('>_')
+
+        if (secondMove === "hungry") {
+          moveToRoom(room5)
+          console.log(room5.message)
+        }
+        if (secondMove === "tired") {
+          moveToRoom(room4)
+          console.log(room4.message)
+        }
+      }
+
+    }
+  }
+  function moveToRoom(newRoom) {
+    let validTransitions = states[currentRoom.name].canChangeTo
+    if (validTransitions.includes(newRoom.name)) {
+      currentRoom = newRoom;
+    }
+    else {
+      console.log('You cant go there!')
     }
 
-
-    function moveToRoom(newRoom) {
-      let validTransitions = states[currentRoom.name].canChangeTo
-      if (validTransitions.includes(newRoom.name)) {
-        currentRoom = newRoom;
-      }
-      else {
-        console.log('You cant go there!')
-      }
-
-    }
   }
 }
